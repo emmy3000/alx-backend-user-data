@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-API authentication management
+Custom API authentication management module.
 """
 from typing import List, TypeVar
 from flask import request
