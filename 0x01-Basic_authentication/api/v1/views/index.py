@@ -9,9 +9,18 @@ from api.v1.views import app_views
 def unauthorized():
     """GET /api/v1/unauthorized
     Return:
-      - raise an error 401 status code.
+      - raise a 401 error status code.
     """
     abort(401, description="Unauthorized")
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden():
+    """ GET /api/v1/forbidden
+    Return:
+      - Raise a 403 error status code.
+    """
+    abort(403, description="Forbidden")
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
