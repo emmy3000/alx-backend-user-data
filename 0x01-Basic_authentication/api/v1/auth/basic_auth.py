@@ -58,7 +58,7 @@ class BasicAuth(Auth):
             decoded_bytes = base64.b64decode(base64_authorization_header)
             decoded_str = decoded_bytes.decode('utf-8')
             return decoded_str
-        except binascii.Error:
+        except (binascii.Error, UnicodeDecodeError):
             return None
 
     def extract_user_credentials(
@@ -117,3 +117,44 @@ class BasicAuth(Auth):
                 return user
 
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Retrieve the User instance for the provided request.
+
+        Args:
+          request (Flask Request): The request object, containing the
+          authorization header.
+
+        Return:
+          TypeVar('User'): The User instance if authorized,
+          or None if not found.
+        """
+        if request is None:
+            return None
+
+        auth_header = self.authorization_header(request)
+
+        if auth_header is None:
+            return None
+
+        base64_auth_header = self.extract_base64_authorization_header(
+            auth_header)
+
+        if base64_auth_header is None:
+            return None
+
+        decoded_base64_header = self.decode_base64_authorization_header(
+            base64_auth_header)
+
+        if decoded_base64_header is None:
+            return None
+
+        user_email, user_pwd = self.extract_user_credentials(
+            decoded_base64_header)
+
+        if user_email is None or user_pwd is None:
+            return None
+
+        user = self.user_object_from_credentials(user_email, user_pwd)
+
+        return user
