@@ -26,6 +26,7 @@ class BasicAuth(Auth):
             return None
 
         auth_parts = authorization_header.split()
+
         if len(auth_parts) != 2 or auth_parts[0] != "Basic":
             return None
 
