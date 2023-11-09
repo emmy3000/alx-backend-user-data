@@ -14,22 +14,19 @@ class Auth:
         """Checks if authentication is required for a given path.
 
         Args:
-          path (str): The path to check for authentication.
-          excluded_paths (List[str]): List of excluded paths.
+            path (str): The path to check for authentication.
+            excluded_paths (List[str]): List of excluded paths.
 
         Return:
-          bool: True if authentication is required, False if not.
+            bool: True if authentication is required, False if not.
         """
         if path is None or excluded_paths is None or not excluded_paths:
             return True
 
-        if path in excluded_paths or path[-1] != '/' and path + \
-                '/' in excluded_paths:
-            return False
-
-        for ignored_path in excluded_paths:
-            if ignored_path.endswith(
-                    '*') and path.startswith(ignored_path[:-1]):
+        for excluded_path in excluded_paths:
+            if excluded_path.endswith("*") and path.startswith(excluded_path[:-1]):
+                return False
+            elif path == excluded_path:
                 return False
 
         return True
