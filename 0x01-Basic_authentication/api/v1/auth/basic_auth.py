@@ -6,7 +6,7 @@ from api.v1.auth.auth import Auth
 import base64
 import binascii
 from models.user import User
-from typing import TypeVar
+from typing import TypeVar, List
 
 
 class BasicAuth(Auth):
@@ -88,6 +88,14 @@ class BasicAuth(Auth):
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """Get the User instance based on email and password.
+
+        Args:
+          user_email (str): The user's email.
+          user_pwd (str): The user's password.
+
+        Return:
+          TypeVar('User'): The User instance if valid credentials,
+          or None if not found.
         """
         if user_email is None or not isinstance(user_email, str):
             return None
@@ -95,14 +103,17 @@ class BasicAuth(Auth):
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
 
-        user_list = User.search({'email': user_email})
+        try:
+            user_list: List[TypeVar('User')]
+            user_list = User.search({'email': user_email})
+        except Exception:
+            return None
 
         if not user_list:
             return None
 
-        user = user_list[0]
+        for user in user_list:
+            if user.is_valid_password(user_pwd):
+                return user
 
-        if not user.is_valid_password(user_pwd):
-            return None
-
-        return user
+        return None
