@@ -156,5 +156,3 @@ class BasicAuth(Auth):
             return None
 
         user = self.user_object_from_credentials(user_email, user_pwd)
-
-        return user
