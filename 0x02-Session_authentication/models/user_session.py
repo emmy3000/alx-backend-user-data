@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+""" UserSession module
+"""
+from models.base import Base
+
+
+class UserSession(Base):
+    """
+    UserSession class represents a user session.
+
+    Attributes:
+        user_id (str): The user ID associated with the session.
+        session_id (str): The unique identifier for the session.
+    """
+
+    def __init__(self, *args: list, **kwargs: dict):
+        """
+        Method initialize a UserSession's instance.
+
+        Args:
+            *args (list): Variable positional arguments.
+            **kwargs (dict): Variable keyword arguments.
+                user_id (str): The user ID associated with the session.
+                session_id (str): The unique identifier for the session.
+        """
+        super().__init__(*args, **kwargs)
+        self.user_id = kwargs.get('user_id')
+        self.session_id = kwargs.get('session_id')
