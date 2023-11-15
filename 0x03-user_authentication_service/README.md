@@ -148,7 +148,7 @@ maintain consistency, install the dependencies used in that project into the cur
 To facilitate the development of the user authentication service project, certain crucial package dependencies are 
 required.
 
-`Bcrypt` *Module:*
+- `Bcrypt` *Module:*
 
 The `Bcrypt` module provides a secure method for hashing passwords using the bcrypt hashing algorithm. This algorithm 
 intentionally operates at a slow pace, making it computationally intensive and enhancing resistance to brute-force attacks.
@@ -157,7 +157,7 @@ intentionally operates at a slow pace, making it computationally intensive and e
 (.venv)$ pip3 install bcrypt
 ```
 
-`SQLAlchemy` *Module:*
+- `SQLAlchemy` *Module:*
 
 `SQLAlchemy` is a robust SQL toolkit and Object-Relational Mapping (ORM) library for Python. It simplifies database 
 access and manipulation by enabling developers to use Python objects and methods rather than raw SQL queries.
