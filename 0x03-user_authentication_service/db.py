@@ -5,8 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from sqlalchemy.exc import NoResultFound, InvalidRequestError
-from sqlalchemy.orm.exc import MultipleResultsFound
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 from user import Base, User
 
@@ -60,12 +60,10 @@ class DB:
         Raises:
             NoResultFound: If no result is found.
             InvalidRequestError: If an invalid query argument is provided.
-            MultipleResultsFound: If multiple results are found.
         """
         try:
-            user = self._session.query(User).filter_by(**kwargs).one()
-            return user
-        except NoResultFound as e:
-            raise e
-        except (InvalidRequestError, MultipleResultsFound) as e:
+            return self._session.query(User).filter_by(**kwargs).one()
+        except NoResultFound:
+            raise NoResultFound("No user found with the specified criteria.")
+        except InvalidRequestError as e:
             raise InvalidRequestError("Invalid query argument") from e
