@@ -7,7 +7,7 @@ This documentation outlines the implementation and understanding of a basic user
 ## Key Learning Objectives
 1. **Declaring API Routes in a Flask App:**
 
-- In this section, we delve into the process of declaring API routes within a Flask application. Understanding how to 
+In this section, we delve into the process of declaring API routes within a Flask application. Understanding how to 
 structure and define routes is fundamental to creating an effective authentication service. 
 
 Example:
@@ -31,7 +31,7 @@ def logout():
 
 2. **Getting and Setting Cookies:**
 
-- Cookies play a crucial role in web authentication. Learn how to handle cookies to maintain user sessions and store 
+Cookies play a crucial role in web authentication. Learn how to handle cookies to maintain user sessions and store 
 relevant information securely. 
 
 Example:
@@ -56,7 +56,7 @@ def login():
 
 3. **Retrieving Request Form Data:**
 
-- Understanding how to retrieve and process data from incoming requests is essential for user authentication. In 
+Understanding how to retrieve and process data from incoming requests is essential for user authentication. In 
 Flask, this often involves accessing form data submitted through HTTP POST requests.
 
 Example:
@@ -76,7 +76,7 @@ def login():
 
 4. **Returning Various HTTP Status Codes:**
 
-- Effectively communicating the status of operations is critical. Learn how to return appropriate HTTP status codes 
+Effectively communicating the status of operations is critical. Learn how to return appropriate HTTP status codes 
 to indicate success, failure, or other relevant conditions.
 
 Example:
