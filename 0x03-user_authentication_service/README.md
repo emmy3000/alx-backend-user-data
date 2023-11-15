@@ -105,8 +105,9 @@ def login():
 Setting up the project involves creating a structured environment and managing dependencies to ensure a seamless 
 development process.
 
-**NOTE:** *The following steps for setting up a project must be undertaken before carrying out other implementations, 
-including all code logic definitions found under the sub-header "Key Learning Objectives".*
+**NOTE:** *Below are some important steps needed for setting up the project, each step MUST be undertaken in a 
+sequential order before carrying out other implementations which also includes all code logic definitions found under 
+the sub-header* - "[Key Learning Objectives](#key-learning-objectives)".
 
 1. **Project Repository:**
 
