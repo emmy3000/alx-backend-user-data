@@ -23,6 +23,11 @@ class UserSession(Base):
                 user_id (str): The user ID associated with the session.
                 session_id (str): The unique identifier for the session.
         """
-        super().__init__(*args, **kwargs)
-        self.user_id = kwargs.get('user_id')
-        self.session_id = kwargs.get('session_id')
+        # Extract values from positional arguments if available
+        if args:
+            self.user_id = args[0]
+            self.session_id = args[1] if len(args) > 1 else None
+        else:
+            # Extract values from keyword arguments
+            self.user_id = kwargs.get('user_id')
+            self.session_id = kwargs.get('session_id')
