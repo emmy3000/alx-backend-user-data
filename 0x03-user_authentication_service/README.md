@@ -9,8 +9,8 @@ comprehend the underlying mechanisms by building from scratch.
 
 ## Key Learning Objectives
 
-In this section, simple and basic implementations are utilized to enable the application server to carry out 
-essential tasks for establishing robust user authentication services.
+In this section, simple and basic implementations are utilized in enabling the application server carry out 
+essential tasks necessary for establishing robust user authentication services.
 
 1. **Declaring API Routes in a Flask App:**
 
