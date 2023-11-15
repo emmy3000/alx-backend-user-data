@@ -2,9 +2,13 @@
 
 ## Overview
 
-This documentation outlines the implementation and understanding of a basic user authentication service in the context of a Flask web application. While it's emphasized in industry to use established modules or frameworks for authentication (such as Flask-User in the case of Python-Flask), this project serves as a learning exercise to comprehend the underlying mechanisms by building from scratch.
+This documentation outlines the implementation and understanding of a basic user authentication service in the 
+context of a Flask web application. While it's emphasized in industry to use established modules or frameworks for 
+authentication (such as `Flask-User` in the case of Python-Flask), this project serves as a learning exercise to 
+comprehend the underlying mechanisms by building from scratch.
 
 ## Key Learning Objectives
+
 1. **Declaring API Routes in a Flask App:**
 
 In this section, we delve into the process of declaring API routes within a Flask application. Understanding how to 
@@ -99,7 +103,7 @@ Setting up the project involves creating a structured environment and managing d
 
 1. **Project Repository:**
 
-- Create a new directory to serve as the project's code base and navigate into it:
+Create a new directory to serve as the project's code base and navigate into it:
 
 ```shell
 $ mkdir 0x03-user_authentication_service
@@ -108,7 +112,7 @@ $ cd 0x03-user_authentication_service
 
 2. **Virtual Environment:**
 
-- Create and activate a virtual environment for project isolation and dependency management:
+Create and activate a virtual environment for project isolation and dependency management:
 
 ```shell
 $ python3 -m venv .venv
@@ -117,7 +121,7 @@ $ source .venv/bin/activate
 
 3. **Package Management Upgrade:**
 
-- Ensure Python's package manager (`pip`) is up to date within the virtual environment:
+Ensure Python's package manager (`pip`) is up to date within the virtual environment:
 
 ```shell
 (.venv)$ pip install --upgrade pip
@@ -125,7 +129,7 @@ $ source .venv/bin/activate
 
 4. **Installation of Package Dependencies:**
 
-- This project is an extension of a previous project located in the directory `"0x02-Session_authentication/"`. To 
+This project is an extension of a previous project located in the directory `"0x02-Session_authentication/"`. To 
 maintain consistency, install the dependencies used in that project into the current one:
 
 ```shell
