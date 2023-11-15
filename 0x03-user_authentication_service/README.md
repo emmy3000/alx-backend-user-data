@@ -106,8 +106,8 @@ Setting up the project involves creating a structured environment and managing d
 development process.
 
 **NOTE:** *Below are some important steps needed for setting up the project, each step MUST be undertaken in a 
-sequential order before carrying out other implementations which also includes all code logic definitions in the 
-section classified under* [Key Learning Objectives](#key-learning-objectives) *sub-heading*.
+sequential order before carrying out other implementations, and this also includes all code logic definitions found in 
+the section classified under* [Key Learning Objectives](#key-learning-objectives) *sub-heading*.
 
 1. **Project Repository:**
 
