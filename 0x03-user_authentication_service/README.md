@@ -93,5 +93,87 @@ def login():
         abort(401, "Authentication failed")
 ```
 
+## Project Setup
+
+Setting up the project involves creating a structured environment and managing dependencies to ensure a seamless development process.
+
+1. **Project Repository:**
+
+- Create a new directory to serve as the project's code base and navigate into it:
+
+```shell
+$ mkdir 0x03-user_authentication_service
+$ cd 0x03-user_authentication_service
+```
+
+2. **Virtual Environment:**
+
+- Create and activate a virtual environment for project isolation and dependency management:
+
+```shell
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+```
+
+3. **Package Management Upgrade:**
+
+- Ensure Python's package manager (`pip`) is up to date within the virtual environment:
+
+```shell
+(.venv)$ pip install --upgrade pip
+```
+
+4. **Installation of Package Dependencies:**
+
+- This project is an extension of a previous project located in the directory `"0x02-Session_authentication/"`. To 
+maintain consistency, install the dependencies used in that project into the current one:
+
+```shell
+(.venv)$ pip3 install -r ../0x02-Session_authentication/requirements.txt
+```
+
+5. **Introducing New Package Dependencies:**
+
+`Bcrypt` *Module:*
+
+The `Bcrypt` module provides a secure method for hashing passwords using the bcrypt hashing algorithm. This 
+algorithm is deliberately slow and computationally intensive, enhancing resistance to brute-force attacks.
+
+```shell
+(.venv)$ pip3 install bcrypt
+```
+
+`SQLAlchemy` *Module:*
+
+It's a robust SQL toolkit and Object-Relational Mapping (ORM) library for Python. It simplifies database access and 
+manipulation by allowing developers to use Python objects and methods instead of raw SQL queries.
+
+```shell
+(.venv)$ pip3 install SQLAlchemy
+```
+
+6. **Project's Personal Package Dependencies:**
+
+In step 4, dependencies from a previous project were introduced, and in step 5, new dependencies specific to this 
+project (`bcrypt` and `SQLAlchemy`) were added. To manage these dependencies efficiently, create and populate a 
+`requirements.txt` file:
+
+```shell
+(.venv)$ pip3 freeze > requirements.txt
+```
+
+By following these steps, a clean and organized environment will be established for developing the user 
+authentication service.
+
+## Conclusion
+
+In summary, this documentation serves as a guide for building a simple and basic user authentication service in Flask.
+It focuses on key objectives such as defining *API routes*, *handling cookies*, *processing form data*, and 
+*managing HTTP status codes*.
+
+The project setup section ensures a smooth start, covering repository creation, virtual environment setup, and 
+package installations. By following these steps, you're well-prepared to commence development on a clean and 
+organized user authentication service project. Happy coding!
+
 ## Author 
 Emeka Emodi
