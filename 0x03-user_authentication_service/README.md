@@ -9,6 +9,9 @@ comprehend the underlying mechanisms by building from scratch.
 
 ## Key Learning Objectives
 
+In this section, simple and basic implementations are utilized to enable the application server to carry out 
+essential tasks for establishing robust user authentication services.
+
 1. **Declaring API Routes in a Flask App:**
 
 In this section, we delve into the process of declaring API routes within a Flask application. Understanding how to 
@@ -99,7 +102,11 @@ def login():
 
 ## Project Setup
 
-Setting up the project involves creating a structured environment and managing dependencies to ensure a seamless development process.
+Setting up the project involves creating a structured environment and managing dependencies to ensure a seamless 
+development process.
+
+**NOTE:** *The following steps for setting up a project must be undertaken before carrying out other implementations, 
+including all code logic definitions found under the sub-header "Key Learning Objectives".*
 
 1. **Project Repository:**
 
