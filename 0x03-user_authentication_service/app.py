@@ -90,13 +90,31 @@ def logout():
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
 
-    if user:
+    if user or session_id:
         # If a user exists, destroy the session and redirect to "/"
         AUTH.destroy_session(user.id)
         return redirect("/")
     else:
         # If no user is found, respond with a 403 Forbidden status
-        return jsonify({"message": "Forbidden"}), 403
+        abort(403)
+
+
+@app.route("/profile", methods=["GET"], strict_slashes=False)
+def profile():
+    """Get user profile based on the session ID.
+
+    Returns:
+       Response: A Flask Response with JSON payload or 403 status.
+    """
+    session_id = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_id)
+
+    if user:
+        # If user exists, respond with status code 200 and user's email
+        return jsonify({"email": user.email}), 200
+    else:
+        # If no user exists or invalid session ID, respond with 403 status
+        abort(403)
 
 
 if __name__ == "__main__":
