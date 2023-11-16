@@ -2,7 +2,15 @@
 """
 Flask application for user authentication service.
 """
-from flask import Flask, jsonify, request, abort, make_response
+from flask import (
+    Flask,
+    jsonify,
+    request,
+    abort,
+    make_response,
+    redirect
+)
+
 from auth import Auth
 
 app = Flask(__name__)
@@ -70,6 +78,25 @@ def login():
     except ValueError as e:
         # Handle other exceptions if needed
         abort(500, str(e))
+
+
+@app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+def logout():
+    """Logout user by destroying the session.
+
+    Returns:
+       Response: A Flask Response with redirection or 403 status.
+    """
+    session_id = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_id)
+
+    if user:
+        # If a user exists, destroy the session and redirect to "/"
+        AUTH.destroy_session(user.id)
+        return redirect("/")
+    else:
+        # If no user is found, respond with a 403 Forbidden status
+        return jsonify({"message": "Forbidden"}), 403
 
 
 if __name__ == "__main__":
