@@ -5,7 +5,7 @@ Authentication module.
 import bcrypt
 import uuid
 from sqlalchemy.orm.exc import NoResultFound
-from typing import TypeVar, Union
+from typing import Optional, TypeVar, Union
 
 from db import DB
 from user import User
