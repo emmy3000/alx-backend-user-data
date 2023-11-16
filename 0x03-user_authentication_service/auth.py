@@ -77,7 +77,7 @@ class Auth:
             return user
 
     def valid_login(self, email: str, password: str) -> bool:
-        """Validate user login credentials.
+        """Validate the user's login credentials.
 
         Args:
             email (str): The user's email.
