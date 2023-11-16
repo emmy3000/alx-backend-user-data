@@ -12,13 +12,14 @@ from flask import (
 )
 
 from auth import Auth
+from sqlalchemy.orm.exc import NoResultFound
 
 app = Flask(__name__)
 AUTH = Auth()
 
 
 @app.route("/", strict_slashes=False)
-def welcome():
+def welcome() -> str:
     """Render a welcome message as a JSON response.
 
     Returns:
@@ -28,7 +29,7 @@ def welcome():
 
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
-def register_user():
+def users() -> str:
     """Register a new user.
 
     Returns:
@@ -49,7 +50,7 @@ def register_user():
 
 
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
-def login():
+def login() -> str:
     """Handle user login.
 
     Returns:
@@ -87,7 +88,7 @@ def logout():
     Returns:
        Response: A Flask Response with redirection or 403 status.
     """
-    session_id = request.cookies.get("session_id")
+    session_id = request.cookies.get("session_id", None)
     user = AUTH.get_user_from_session_id(session_id)
 
     if user or session_id:
@@ -100,7 +101,7 @@ def logout():
 
 
 @app.route("/profile", methods=["GET"], strict_slashes=False)
-def profile():
+def profile() -> str:
     """Get user profile based on the session ID.
 
     Returns:
@@ -118,7 +119,7 @@ def profile():
 
 
 @app.route("/reset_password", methods=["POST"], strict_slashes=False)
-def get_reset_password_token():
+def get_reset_password_token() -> str:
     """Generate a reset password token based on the provided email.
 
     Returns:
@@ -133,7 +134,34 @@ def get_reset_password_token():
 
     except ValueError:
         # If user isn't found, abort with a 403 Forbidden status
-        abort(403, {"message": "Forbidden"})
+        abort(403)
+
+
+@app.route("/reset_password", methods=["PUT"], strict_slashes=False)
+def update_password() -> str:
+    """Update user password based on reset token.
+
+    Returns:
+       Flask response: JSON payload with email and message.
+       HTTP status codes:
+           200 - Password updated.
+           403 - Invalid reset token.
+    """
+    try:
+        # Extract email, reset_token, and new_password from the request form
+        email = request.form.get("email")
+        reset_token = request.form.get("reset_token")
+        new_password = request.form.get("new_password")
+
+        # Update the password using the reset token
+        AUTH.update_password(reset_token, new_password)
+
+        # Return a JSON response indicating a successful password update
+        return jsonify({"email": email, "message": "Password updated"}), 200
+
+    except NoResultFound as e:
+        # Handle the case where the reset token is invalid
+        abort(403, str(e))
 
 
 if __name__ == "__main__":
