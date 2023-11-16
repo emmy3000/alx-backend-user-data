@@ -179,10 +179,13 @@ class Auth:
         Raises:
            ValueError: If the user does not exist.
         """
-        user = self._get_user_by_email(email)
+        try:
+            # Attempt to retrieve user by email from the database
+            user = self._get_user_by_email(email)
 
-        if not user:
-            raise ValueError("User with email {} not found.".format(email))
+        except NoResultFound:
+            # Raise a ValueError if no user is found for the specified email
+            raise ValueError
 
         reset_token = _generate_uuid()
         self._db.update_user(user.id, reset_token=reset_token)
