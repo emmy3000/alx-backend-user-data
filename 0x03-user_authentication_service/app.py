@@ -130,7 +130,7 @@ def get_reset_password_token():
         # Generate a reset password token for the specified email
         reset_token = AUTH.get_reset_password_token(email)
 
-    except BaseException:
+    except ValueError:
         # If user isn't found, abort with a 403 Forbidden status
         abort(403)
 
