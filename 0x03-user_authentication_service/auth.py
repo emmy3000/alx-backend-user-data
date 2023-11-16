@@ -91,10 +91,16 @@ class Auth:
             # Check if a specified email exists in the database
             user = self._db.find_user_by(email=email)
             hashed_password = user.hashed_password
-            return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+            passwd = password.encode("utf-8")
+            return bcrypt.checkpw(passwd, hashed_password)
 
         except NoResultFound:
             # Return False if no user is found with the specified email
+            return False
+
+        except Exception as e:
+            # Handle other exceptions gracefully
+            print("An error occurred: {}".format(e))
             return False
 
     def create_session(self, email: str) -> str:
