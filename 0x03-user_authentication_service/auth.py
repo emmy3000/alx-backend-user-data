@@ -5,9 +5,12 @@ Authentication module.
 import bcrypt
 import uuid
 from sqlalchemy.orm.exc import NoResultFound
+from typing import TypeVar, Union
 
 from db import DB
 from user import User
+
+Obj = TypeVar(User)
 
 
 def _hash_password(password: str) -> bytes:
@@ -39,7 +42,7 @@ class Auth:
     """Auth class to interact with the authentication database.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize a new Auth instance.
 
         The constructor creates a new instance of the Auth class
@@ -98,12 +101,7 @@ class Auth:
             # Return False if no user is found with the specified email
             return False
 
-        except Exception as e:
-            # Handle other exceptions gracefully
-            print("An error occurred: {}".format(e))
-            return False
-
-    def create_session(self, email: str) -> str:
+    def create_session(self, email: str) -> Union[None, str]:
         """Create a new session for the user with the specified email.
 
         Args:
@@ -116,22 +114,21 @@ class Auth:
             # Find the user by email and create a new session ID
             user = self._db.find_user_by(email=email)
             session_id = _generate_uuid()
-            user.session_id = session_id
-            self._db._session.commit()
+            self._db.update_user(user.id, session_id=session_id)
             return session_id
 
         except NoResultFound:
             # Return None if no user is found with the specified email
             return None
 
-    def get_user_from_session_id(self, session_id: str) -> User:
+    def get_user_from_session_id(self, session_id: str) -> Union[None, Obj]:
         """Get a user based on the provided session ID.
 
         Args:
            session_id (str): The session ID.
 
         Returns:
-           User: The corresponding User object or None if not found.
+           user object if found, else None
         """
         # Check if the session ID is None; if so, return None
         if session_id is None:
