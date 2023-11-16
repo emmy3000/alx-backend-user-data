@@ -159,9 +159,9 @@ def update_password() -> str:
         # Return a JSON response indicating a successful password update
         return jsonify({"email": email, "message": "Password updated"}), 200
 
-    except NoResultFound as e:
+    except ValueError:
         # Handle the case where the reset token is invalid
-        abort(403, str(e))
+        abort(403)
 
 
 if __name__ == "__main__":
