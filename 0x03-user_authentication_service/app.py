@@ -129,13 +129,11 @@ def get_reset_password_token():
     try:
         # Generate a reset password token for the specified email
         reset_token = AUTH.get_reset_password_token(email)
+        return jsonify({"email": email, "reset_token": reset_token}), 200
 
     except ValueError:
         # If user isn't found, abort with a 403 Forbidden status
-        abort(403)
-
-    return jsonify({"email": "{}".format(email),
-                    "reset_token": "{}".format(reset_token)})
+        abort(403, {"message": "Forbidden"})
 
 
 if __name__ == "__main__":
