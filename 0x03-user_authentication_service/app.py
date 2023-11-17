@@ -76,9 +76,9 @@ def login() -> str:
             # Incorrect login information
             abort(401)
 
-    except ValueError as e:
+    except ValueError:
         # Handle other exceptions if needed
-        abort(500, str(e))
+        pass
 
 
 @app.route("/sessions", methods=["DELETE"], strict_slashes=False)
@@ -86,7 +86,7 @@ def logout():
     """Logout user by destroying the session.
 
     Returns:
-       Response: A Flask Response with redirection or 403 status.
+        Response: A Flask Response with redirection or 403 status.
     """
     session_id = request.cookies.get("session_id", None)
     user = AUTH.get_user_from_session_id(session_id)
