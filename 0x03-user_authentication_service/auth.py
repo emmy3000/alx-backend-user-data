@@ -94,8 +94,8 @@ class Auth:
             # Check if a specified email exists in the database
             user = self._db.find_user_by(email=email)
             hashed_password = user.hashed_password
-            passwd = password.encode("utf-8")
-            return bcrypt.checkpw(passwd, hashed_password)
+            encoded_password = password.encode("utf-8")
+            return bcrypt.checkpw(encoded_password, hashed_password)
 
         except NoResultFound:
             # Return False if no user is found with the specified email
@@ -155,13 +155,12 @@ class Auth:
         """
         try:
             # Find the user by user ID and update the session ID to None
-            user = self._db.find_user_by(id=user_id)
-            user.session_id = None
-            self._db._session.commit()
+            user = self._db.update_user(user_id, session_id=None)
 
-        except NoResultFound:
+        except ValueError:
             # No user found with the specified user ID
-            pass
+            return None
+        return None
 
     def get_reset_password_token(self, email: str) -> str:
         """Get the reset password token for the user
@@ -178,7 +177,7 @@ class Auth:
         """
         try:
             # Attempt to retrieve user by email from the database
-            user = self._get_user_by_email(email)
+            user = self._db.find_user_by(email=email)
 
         except NoResultFound:
             # Raise a ValueError if no user is found for the specified email
